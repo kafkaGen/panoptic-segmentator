@@ -1,0 +1,7 @@
+- find model for removal
+- search for app creation (stramlit)
+- add pytest
+- add fastapi, service and client script
+- docker, docker-compose
+- CI/CD
+- model optimization (ONNX, pruning, ...)
