@@ -1,0 +1,4 @@
+*pycache*
+dev/
+.micromamba/
+.mypy_cache/
