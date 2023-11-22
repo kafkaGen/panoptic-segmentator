@@ -3,10 +3,6 @@ on:
   push:
     branches:
       - master
-env:
-  CONTAINER_FULL_NAME: '${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest'
-  AWS_PRIVATE_KEY: '${{ secrets.AWS_PRIVATE_KEY }}'
-  EC2_IP: '${{ secrets.EC2_IP }}'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,7 +22,7 @@ jobs:
           context: ./
           push: true
           dockerfile: ./Dockerfile
-          tags: $CONTAINER_FULL_NAME
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
   deploy:
     needs: build
     runs-on: ubuntu-latest
