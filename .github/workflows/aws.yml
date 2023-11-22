@@ -4,7 +4,7 @@ on:
     branches:
       - master
 env:
-  DOCKERHUB_USERNAME: olko123123123
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
   CONTAINER_FULL_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
   AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
