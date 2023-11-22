@@ -1,4 +1,5 @@
 *pycache*
 dev/
+bin/
 .micromamba/
 .mypy_cache/

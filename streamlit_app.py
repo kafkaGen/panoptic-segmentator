@@ -9,7 +9,7 @@ from core.watermark_remover import WatermarkRemover
 if __name__ == "__main__":
     watermark_remover = WatermarkRemover()
 
-    st.set_page_config(layout="wide")
+    st.set_page_config(page_title="Hello from CI/CD", layout="wide")
     st.sidebar.write(
         """
         # Welcome to Watermark Remover project
