@@ -1,17 +1,19 @@
-FROM python:3.10.10-slim
+FROM mambaorg/micromamba
 
 LABEL author='Oleh Borysevych'
 LABEL email='borysevych.oleh87@gmail.com'
 
-RUN apt-get update
-RUN mkdir /app
+COPY --chown=$MAMBA_USER:$MAMBA_USER requirements.yaml /tmp/env.yaml
+RUN micromamba install -y -n base -f /tmp/env.yaml && \
+    micromamba clean --all --yes
 
-COPY core streamlit_app.py requirements.txt /app/
+# RUN apt update
+RUN mkdir app
+
+COPY streamlit_app.py requirements.yaml docker-compose.yml /app/
+COPY core /app/core
 WORKDIR /app
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+EXPOSE 80
 
-EXPOSE 8080
-
-CMD ["streamlit", "run", "streamlit_app.py", "--server.port", "8080"]
+CMD ["streamlit", "run", "streamlit_app.py", "--server.port", "80"]

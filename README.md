@@ -1,9 +1,11 @@
+- docker, docker-compose
+- deploy
+- CI/CD (github action)
 - build model for removal [
     https://www.youtube.com/watch?v=Oq3FyfgawSc
+    https://github.com/zuruoke/watermark-removal
 ]
-- search for app creation (stramlit)
-- add pytest
 - add fastapi, service and client script
-- docker, docker-compose
-- CI/CD
+- README
+- add pytest
 - model optimization (ONNX, pruning, ...)

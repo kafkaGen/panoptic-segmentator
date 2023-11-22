@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+  my-service:
+    image: watermark_remover:latest
+    container_name: watermark_remover
+    # volumes:
+    #   - volume1:/docker_path/
+    # environment:
+    #   - MyENV="pass12"
+    ports:
+      - "80:80"
+    restart: unless-stopped
