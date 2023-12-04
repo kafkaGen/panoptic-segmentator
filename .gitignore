@@ -1,5 +1,8 @@
 *pycache*
 dev/
 bin/
+models/
+generated/
+inputs/
 .micromamba/
 .mypy_cache/

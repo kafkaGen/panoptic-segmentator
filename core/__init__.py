@@ -1,1 +1,1 @@
-from .watermark_remover import WatermarkRemover
+from .panoptic_segmentator import PanopticSegmentator
