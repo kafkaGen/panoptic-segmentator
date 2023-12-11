@@ -1,12 +1,17 @@
 version: "3.5"
 services:
-  my-service:
-    image: panoptic_segmentator:latest
-    container_name: panoptic_segmentator
-    # volumes:
-    #   - volume1:/docker_path/
-    # environment:
-    #   - MyENV="pass12"
+  panoptic_segmentator:
+    image: panoptic-segmentator:latest
+    container_name: panoptic-segmentator
     ports:
       - "80:80"
+    devices:
+      - /dev/video0:/dev/video0
     restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]

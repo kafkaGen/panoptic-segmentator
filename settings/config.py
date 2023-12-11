@@ -1,5 +1,6 @@
+from typing import Union
+
 import torch
-from typoing import Union
 
 
 class Config:

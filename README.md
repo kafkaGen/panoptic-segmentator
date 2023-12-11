@@ -1,7 +1,6 @@
-- deploy
+- deploy (gpu docker image, test image video webcam, run application, docker-compose)
 - add model selection (live video on the lightest model)
 - README
-- gpu support
 - model optimization (ONNX, pruning, ...)
 - add fastapi, service and client script
 - README
