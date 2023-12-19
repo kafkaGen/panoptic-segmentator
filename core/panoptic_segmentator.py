@@ -8,9 +8,9 @@ from settings import Config  # type: ignore[attr-defined]
 
 
 class PanopticSegmentator:
-    def __init__(
-        self, model_config: str = Config.model_config, model_checkpoint: str = Config.model_checkpoint, device: str = Config.device
-    ) -> None:
+    def __init__(self, model_name: str, device: str = Config.device) -> None:
+        model_config = f"{Config.models_dir}/{model_name}.py"
+        model_checkpoint = f"{Config.models_dir}/{model_name}.pth"
         self.inferencer = DetInferencer(model=model_config, weights=model_checkpoint, device=device)
 
     def __call__(self, imgs: Union[np.array, list[np.array]]) -> list[np.array]:

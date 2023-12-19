@@ -3,10 +3,12 @@ import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 
 from core.panoptic_segmentator import PanopticSegmentator
+from settings import Config  # type: ignore[attr-defined]
 
 
 def live_webcanm() -> None:
-    panotpic_segmentator = PanopticSegmentator()
+    default_model_name = list(Config.model_checkpoints.keys())[0]
+    panotpic_segmentator = PanopticSegmentator(default_model_name)
 
     st.set_page_config(page_title="Panoptic Segmentator - Live", layout="wide")
     st.write("# Live Webcam Panoptic Segmentation ")

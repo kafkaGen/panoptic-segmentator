@@ -32,19 +32,15 @@ def settup_layout() -> None:
     linkedin.write("[LinkedIn](https://www.linkedin.com/in/kafkagen/)")
     telegram.write("[Telegram](https://t.me/boen_dia)")
 
-    st.write(
-        """
-            # Panoptic Segmentator
-            Choose model:
-            """
-        # TODO add model selection
-    )
+    st.write("# Panoptic Segmentator")
 
 
 def app() -> None:
     settup_layout()
 
-    panoptic_segmentator = PanopticSegmentator()
+    sbox_parts = st.columns(8)
+    model_name = sbox_parts[0].selectbox("Choose model:", Config.model_checkpoints.keys())
+    panoptic_segmentator = PanopticSegmentator(model_name)
     uploaded_file = st.file_uploader("Choose a file", accept_multiple_files=False)
     camera_live = st.button("Use Webcam")
 

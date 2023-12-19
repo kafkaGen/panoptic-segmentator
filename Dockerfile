@@ -14,6 +14,8 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 ENV PATH /opt/conda/bin:$PATH
 
 COPY . /app
+COPY conteiner-run.sh docker-compose-cpu.yml docker-compose-gpu.yml requirements.txt requirements.yaml setup.py streamlit_app.py /app/
+
 WORKDIR /app
 
 RUN conda init bash \
@@ -27,7 +29,8 @@ RUN pip install --upgrade pip \
     && mim install "mmcv>=2.0.0" \
     && mim install mmdet \
     && pip install -r requirements.txt \
-    && pip install git+https://github.com/cocodataset/panopticapi.git
+    && pip install git+https://github.com/cocodataset/panopticapi.git \
+    && python setup.py --download-models
 
 EXPOSE 80
 

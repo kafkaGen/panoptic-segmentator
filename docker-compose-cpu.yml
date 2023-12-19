@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  panoptic_segmentator:
+    image: panoptic-segmentator:latest
+    container_name: panoptic-segmentator
+    ports:
+      - "80:80"
+    devices:
+      - /dev/video0:/dev/video0
+    restart: unless-stopped
