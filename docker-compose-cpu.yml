@@ -5,6 +5,4 @@ services:
     container_name: panoptic-segmentator
     ports:
       - "80:80"
-    devices:
-      - /dev/video0:/dev/video0
     restart: unless-stopped

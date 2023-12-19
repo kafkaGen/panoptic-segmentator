@@ -76,7 +76,7 @@ To run the web application, you have two options:
 
 ### Access the Application Online
 
-Alternatively, you can try the application online [here](http://54.82.25.5/). Please note that this is an AWS EC2 free-tier instance, so be patient with its performance.
+Alternatively, you can try the application online [here](http://54.242.166.254). Please note that this is an AWS EC2 free-tier instance, so be patient with its performance.
 
 ## REST API for batch inference
 
