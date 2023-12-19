@@ -1,3 +1,4 @@
+import gc
 import os
 import tempfile
 from io import BytesIO
@@ -5,6 +6,7 @@ from io import BytesIO
 import cv2
 import numpy as np
 import streamlit as st
+import torch
 from PIL import Image
 from streamlit_extras.switch_page_button import switch_page
 
@@ -47,6 +49,9 @@ def app() -> None:
     if camera_live:
         switch_page("live webcam")
     elif uploaded_file is not None:
+        torch.cuda.empty_cache()
+        gc.collect()
+
         left_column, right_column = st.columns(2)
         if uploaded_file.type.split("/")[0] == "image":
             left_column.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
