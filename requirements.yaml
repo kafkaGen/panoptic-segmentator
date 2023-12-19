@@ -4,16 +4,6 @@ channels:
 - pytorch
 - nvidia
 dependencies:
-<<<<<<< HEAD
-- flake8-pyproject==1.2.3
-- numpy==1.26.2
-- opencv==4.8.1
-- pytorch==2.1.1
-- pytorch-cuda=11.8
-- streamlit==1.29.0
-- torchvision==0.16.1
-- yaml==0.2.5
-=======
 - flake8-pyproject=1.2.3=pyhd8ed1ab_0
 - gdown=4.7.1=pyhd8ed1ab_0
 - numpy=1.26.2=py311h64a7726_0
@@ -22,5 +12,3 @@ dependencies:
 - streamlit=1.29.0=pyhd8ed1ab_0
 - torchvision=0.16.1=py311_cu118
 - yaml=0.2.5=h7f98852_2
-name: panoptic-segmentator
->>>>>>> 10013a2 (added model selection, update ci/cd pipeline, autodownload models from gdrive)

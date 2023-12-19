@@ -1,6 +1,1 @@
-<<<<<<< HEAD
-scipy==1.11.4
-streamlit_extras==0.3.5
-=======
 streamlit_extras==0.3.6
->>>>>>> 10013a2 (added model selection, update ci/cd pipeline, autodownload models from gdrive)

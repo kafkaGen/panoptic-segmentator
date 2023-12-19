@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-*pycache*
-dev/
-=======
->>>>>>> 10013a2 (added model selection, update ci/cd pipeline, autodownload models from gdrive)
 bin/
 models/
 generated/

@@ -1,11 +1,5 @@
 import os
 
-<<<<<<< HEAD:utils/help.py
-
-def prepare_enviroment(yaml_file: str = "requirements.yaml", txt_file: str = "requirements.txt") -> None:
-    os.system(f"micromamba env export --from-history > {yaml_file}")
-    os.system(f"pipreqs . --force --savepath {txt_file}")
-=======
 import gdown
 import yaml
 
@@ -31,4 +25,3 @@ def download_model_checkpoints() -> None:
     for model_filepath, model_url in Config.model_checkpoints.items():
         model_filepath = os.path.join(Config.models_dir, f"{model_filepath}.pth")
         gdown.download(id=model_url, output=model_filepath, quiet=False)
->>>>>>> 10013a2 (added model selection, update ci/cd pipeline, autodownload models from gdrive):utils/setups.py
