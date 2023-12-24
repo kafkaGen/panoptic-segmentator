@@ -4,5 +4,6 @@ services:
     image: panoptic-segmentator:latest
     container_name: panoptic-segmentator
     ports:
-      - "80:80"
+      - "8501:8501"
+      - "8000:8000"
     restart: unless-stopped

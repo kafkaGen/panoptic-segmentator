@@ -96,6 +96,7 @@ def app() -> None:
             os.system(f"mv tmp.{Config.segmented_video_output.split('.')[-1]} {Config.segmented_video_output}")
             right_column.video(Config.segmented_video_output)
             left_column.download_button("Download segmentation", data=video_bytes, file_name=uploaded_file.name)
+            os.remove(Config.segmented_video_output)
 
         else:
             st.error("File type not supported", icon="🚨")

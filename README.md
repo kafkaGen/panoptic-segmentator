@@ -50,9 +50,9 @@ To run the web application, you have two options:
     python setup.py --download-models
     ```
 
-7. Run the application using Streamlit:
+7. Run the application using Streamlit and FastAPI:
     ```bash
-    streamlit run streamlit_app.py --server.port 80
+    uvicorn core.api:app --host 0.0.0.0 --port 8000 & streamlit run streamlit_app.py --server.port 8501
     ```
 
 ### Option 2: Docker Installation
@@ -79,8 +79,90 @@ To run the web application, you have two options:
 Alternatively, you can try the application online [here](http://54.242.166.254). Please note that this is an AWS EC2 free-tier instance, so be patient with its performance.
 
 ## REST API for batch inference
+While the web application provides an intuitive interface for individual use, it may not be the most efficient solution for large-scale content processing. For such scenarios, the REST API implementation supports batch inference for both images and videos. Below are examples demonstrating how to make API calls for image and video batch inference.
+
+### Image Batch Inference
+To perform image batch inference, use the following Python code:
+
+```python
+import base64
+import os
+from io import BytesIO
+
+import numpy as np
+import requests
+from PIL import Image
+
+url = "<host>/images/?model_name=<model-name>"
+
+file_list, open_files = [], []
+for path in os.listdir(path_to_imgs):
+    file_path = os.path.join(path_to_imgs, path)
+    open_file = open(file_path, "rb")
+    if ".jpg" in file_path:
+        file_list.append(("images", (path, open_file, "image/jpeg")))
+    else:
+        file_list.append(("images", (path, open_file, "image/png")))
+    open_files.append(open_file)
+
+response = requests.post(url, files=file_list)
+for fl in open_files:
+    fl.close()
+imgs = response.json()["segmented_images_bytes"]
+imgs = [np.array(Image.open(BytesIO(base64.b64decode(img)))) for img in imgs]
+```
+### Video Batch Inference
+For video batch inference, utilize the following Python code:
+```python
+import base64
+import os
+import tempfile
+
+import cv2
+import requests
+
+
+url = "<host>/videos/?model_name=<model-name>"
+
+file_list, open_files = [], []
+for path in os.listdir(path_to_videos):
+    file_path = os.path.join(path_to_videos, path)
+    open_file = open(file_path, "rb")
+    if ".mp4" in file_path:
+        file_list.append(("videos", (path, open_file, "video/mp4")))
+    open_files.append(open_file)
+
+
+response = requests.post(url, files=file_list)
+for fl in open_files:
+    fl.close()
+videos_encoded = response.json()["segmented_videos_bytes"]
+for video in videos_encoded:
+    video_decoded = base64.b64decode(video)
+
+    temp_file = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False)
+    temp_file.write(video_decoded)
+    temp_file_path = temp_file.name
+
+    cap = cv2.VideoCapture(temp_file_path)
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        cv2.imshow("Video", frame)
+        if cv2.waitKey(30) & 0xFF == ord("q"):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+    temp_file.close()
+    os.remove(temp_file_path)
+```
+Feel free to adapt these examples to suit your specific use case and integrate them seamlessly into your workflow for efficient batch processing.
 
 ### todo
-- model optimization (ONNX, pruning, ...)
-- add fastapi, service and client script
-- add pytest (test job to ci/cd, pre-commit)
+- test and push image to docker hub
+- test job to ci/cd, pre-commit

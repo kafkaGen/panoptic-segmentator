@@ -14,6 +14,7 @@ def prepare_enviroment_configuration(yaml_file: str = "requirements.yaml", txt_f
     with open(f"temp_{yaml_file}") as yf:
         hist_config = yaml.load(yf, Loader=yaml.FullLoader)
     config["dependencies"] = [dep for dep in config["dependencies"] if dep.split("=")[0] in hist_config["dependencies"]]
+    config["name"] = "base"
     with open(yaml_file, "w") as yf:
         yaml.dump(config, yf)
     os.remove(f"temp_{yaml_file}")
