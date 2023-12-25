@@ -12,7 +12,9 @@ jobs:
       - name : Install packages
         run: pip install pre-commit flake8-pyproject
       - name: Install pre-commit hooks
-        run: pre-commit install && python -m pip install types-PyYAML types-requests
+        run: |
+          pre-commit install
+          /home/runner/.cache/pre-commit/repon10ckgk_/py_env-python3/bin/python -m pip install types-PyYAML types-requests
       - name: Run pre-commit
         run: pre-commit run --all-files
       
