@@ -10,9 +10,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name : Install packages
-        run: pip install pre-commit flake8-pyproject mypy
-      - name: Install pre-commit hooks and mypy types
-        run: pre-commit install && mypy --install-types --non-interactive
+        run: pip install pre-commit flake8-pyproject
+      - name: Install pre-commit hooks
+        run: pre-commit install
       - name: Run pre-commit
         run: pre-commit run --all-files
       
