@@ -162,7 +162,3 @@ for video in videos_encoded:
     os.remove(temp_file_path)
 ```
 Feel free to adapt these examples to suit your specific use case and integrate them seamlessly into your workflow for efficient batch processing.
-
-### todo
-- test and push image to docker hub
-- test job to ci/cd, pre-commit

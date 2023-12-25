@@ -34,5 +34,5 @@ RUN pip install --upgrade pip \
 EXPOSE 8501:8501
 EXPOSE 8000:8000
 
-CMD ["uvicorn", "core.api:app", "--host", "0.0.0.0", "--port", "8000", "&", \
-    "streamlit", "run", "streamlit_app.py", "--server.port", "8501"]
+CMD ["bash", "-c", \
+    "uvicorn core.api:app --host 0.0.0.0 --port 8000 & streamlit run streamlit_app.py --server.port 8501"]
