@@ -14,7 +14,6 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 ENV PATH /opt/conda/bin:$PATH
 
 COPY . /app
-COPY conteiner-run.sh docker-compose-cpu.yml docker-compose-gpu.yml requirements.txt requirements.yaml setup.py streamlit_app.py /app/
 
 WORKDIR /app
 
@@ -32,6 +31,8 @@ RUN pip install --upgrade pip \
     && pip install git+https://github.com/cocodataset/panopticapi.git \
     && python setup.py --download-models
 
-EXPOSE 80
+EXPOSE 8501:8501
+EXPOSE 8000:8000
 
-CMD ["streamlit", "run", "streamlit_app.py", "--server.port", "80"]
+CMD ["bash", "-c", \
+    "uvicorn core.api:app --host 0.0.0.0 --port 8000 & streamlit run streamlit_app.py --server.port 8501"]

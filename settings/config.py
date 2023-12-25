@@ -2,6 +2,7 @@ import torch
 
 
 class Config:
+    random_seed = 17
     device: torch.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     segmented_video_output: str = "generated/segmented_video.mp4"
     models_dir: str = "models"
