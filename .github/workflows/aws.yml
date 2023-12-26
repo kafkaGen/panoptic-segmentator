@@ -66,6 +66,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker run -it -d --name temp ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest ls'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker cp  temp:/app/docker-compose-cpu.yml ./'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker cp  temp:/app/docker-compose-gpu.yml ./'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker cp  temp:/app/container-run.sh ./'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker stop temp || true'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker rm temp || true'
       - name: Stop running container
@@ -74,5 +76,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker rm ${{ github.event.repository.name }} || true'
       - name: Run new container
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker-compose -f docker-compose-cpu.yml up -d'
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'bash container-run.sh'
           ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@${{ secrets.EC2_IP }} 'sudo docker image prune -f'

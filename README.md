@@ -76,7 +76,7 @@ To run the web application, you have two options:
 
 ### Access the Application Online
 
-Alternatively, you can try the application online [here](http://3.86.28.53). Please note that this is an AWS EC2 free-tier instance, so be patient with its performance.
+Alternatively, you can try the application online [here](http://3.86.28.53:8501). Please note that this is an AWS EC2 free-tier instance, so be patient with its performance.
 
 ## REST API for batch inference
 While the web application provides an intuitive interface for individual use, it may not be the most efficient solution for large-scale content processing. For such scenarios, the REST API implementation supports batch inference for both images and videos. Below are examples demonstrating how to make API calls for image and video batch inference.
